@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Aws\Sns\Message;
+use Aws\Sns\MessageValidator;
 
 /*
 |--------------------------------------------------------------------------
