@@ -19,23 +19,22 @@ use Aws\Sns\Exception\InvalidSnsMessageException
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/sns-notifications', function () {
+Route::post('/sns-notifications', function () {
+    $client = new \GuzzleHttp\Client();
     // Instantiate the Message and Validator
     $message = Message::fromRawPostData();
     $validator = new MessageValidator();
-
     // Validate the message and log errors if invalid.
     try {
         $validator->validate($message);
-    } catch (InvalidSnsMessageException $e) {
+    } catch (\Aws\Sns\Exception\InvalidSnsMessageException $e) {
         // Pretend we're not here if the message is invalid.
         throw $e;
     }
-
+    
     // Check the type of the message and handle the subscription.
     if ($message['Type'] === 'SubscriptionConfirmation') {
         // Confirm the subscription by sending a GET request to the SubscribeURL
-        $this->client->get($message['SubscribeURL']);
+        return $client->get($message['SubscribeURL']);
     }
 });
