@@ -25,7 +25,7 @@ Route::get('/send-notification', function () {
          'MessageAttributes' => [
              'String' => [
                  'DataType' => 'String',
-                 'StringValue' => json_encode(['nicho' => 'mexicans','id' => '123456', 'status' => 'updated'], true),
+                 'StringValue' => json_encode(['nicho' => 'mexicans','id' => '123456', 'status' => 'updated'], true)
              ]
         ],
     ]);
