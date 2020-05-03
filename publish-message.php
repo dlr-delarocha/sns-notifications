@@ -20,14 +20,7 @@ Route::get('/', function () {
 Route::get('/send-notification', function () {
      $sms = \AWS::createClient('sns');
      $sms->publish([
-        'Message' => 'Hi. This is just a test Message',
-         'TargetArn' => 'arn:aws:sns:us-west-2:styde-topic-updates',
-         'MessageAttributes' => [
-             'String' => [
-                 'DataType' => 'String',
-                 'StringValue' => json_encode(['nicho' => 'mexicans','id' => '123456', 'status' => 'updated'], true)
-             ]
-        ],
+         'Message' => json_encode(['nicho_id' => 7287878, 'status' => 'updated'], true),
+         'TargetArn' => 'arn:aws:sns:us-west-2:242380520906:styde-topic-updates',
     ]);
-
 });
