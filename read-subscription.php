@@ -20,10 +20,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//This is only an example.You are able to use other alternaives to retriver data from SNS.
 Route::post('/sns-notifications', function (Request $request) {
     $message = json_decode($request->getContent(), true);
-    \Log::info($request->getContent());
-    if ($message['status'] === 'updated') {
+    $data = json_decode(data_get($message, 'MessageAttributes.Information.Value'), true);
+
+    \Log::info($data);
+    if ($data['status'] === 'updated') {
         \Log::info('Actualizando Nicho');
     } elseif ($message['status'] === 'deleted') {
         \Log::info('Borrando Nicho');
