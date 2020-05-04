@@ -20,7 +20,18 @@ Route::get('/', function () {
 Route::get('/send-notification', function () {
      $sms = \AWS::createClient('sns');
      $sms->publish([
-         'Message' => json_encode(['nicho_id' => 7287878, 'status' => 'updated'], true),
-         'TargetArn' => 'arn:aws:sns:us-west-2:66666666:styde-topic-updates',
+         'Message' => 'Primer publicación SNS',
+         'TargetArn' => 'arn:aws:sns:us-west-2:242380520906:styde-topic-updates',
+         'name' => 'updated',
+         'MessageAttributes' => [
+             'Information' => [
+                 'DataType' => 'String',
+                 'StringValue' => json_encode([
+                     'nicho' => 'mexicans',
+                     'id' => '123456',
+                     'status' => 'updated'
+                 ], true),
+             ]
+        ],
     ]);
 });
